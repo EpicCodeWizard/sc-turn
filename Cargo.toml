@@ -1,5 +1,5 @@
 [package]
-name = "turn-server"
+name = "screenextend-turn"
 version = "0.1.0"
 edition = "2021"
 description = "Standalone TURN relay for ScreenExtend (turn.screenextend.app)"
