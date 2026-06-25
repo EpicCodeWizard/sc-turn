@@ -1,0 +1,24 @@
+[package]
+name = "turn-server"
+version = "0.1.0"
+edition = "2021"
+description = "Standalone TURN relay for ScreenExtend (turn.screenextend.app)"
+
+[[bin]]
+name = "screenextend-turn"
+path = "src/main.rs"
+
+[dependencies]
+# Same versions ScreenExtend's webrtc stack uses, so the long-term-credential
+# (coturn REST) algorithm matches the host app byte-for-byte.
+turn = "0.17"
+# webrtc-util's library name is `webrtc_util`; the turn crate imports it as
+# `util`, so we rename it here to match the `use util::...` paths.
+util = { package = "webrtc-util", version = "0.17", default-features = false, features = ["conn", "vnet"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "signal", "time"] }
+log = "0.4"
+env_logger = "0.11"
+
+[profile.release]
+opt-level = 3
+lto = true
